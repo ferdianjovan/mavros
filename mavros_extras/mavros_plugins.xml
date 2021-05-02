@@ -71,4 +71,7 @@
 	<class name="mount_control" type="mavros::extra_plugins::MountControlPlugin" base_class_type="mavros::plugin::PluginBase">
 		<description>Send Mission command to control a camera or a antenna mount.</description>
 	</class>
+	<class name="button_change" type="mavros::extra_plugins::ButtonChangePlugin" base_class_type="mavros::plugin::PluginBase">
+		<description>Pubs button change msgs to the FCU.</description>
+	</class>
 </library>

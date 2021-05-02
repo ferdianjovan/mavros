@@ -68,6 +68,7 @@ add_message_files(
 add_service_files(
   DIRECTORY srv
   FILES
+  ButtonChange.srv
   CommandBool.srv
   CommandHome.srv
   CommandInt.srv

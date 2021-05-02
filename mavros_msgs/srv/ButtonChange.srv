@@ -1,0 +1,9 @@
+int32 time_boot_ms
+int32 last_change_ms
+uint8 state
+uint8 sysid
+uint8 compid
+---
+bool success
+# raw result returned by COMMAND_ACK
+uint8 result
