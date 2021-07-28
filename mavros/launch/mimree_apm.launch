@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<launch>
+	<!-- ArduPilot based FCU's -->
+	<!-- <arg name="fcu_url" default="/dev/ttyACM0:57600" /> -->
+    <arg name="use_uav" default="false"/>
+    <arg name="use_asv" default="true"/>
+    <arg name="use_irr" default="false"/>
+	<arg name="uav_url" default="udp://127.0.0.1:14551@127.0.0.1:14555" />
+	<arg name="asv_url" default="udp://127.0.0.1:14563@127.0.0.1:14568" />
+	<arg name="irr_url" default="udp://127.0.0.1:14570@127.0.0.1:14575" />
+    <arg name="uav_system_id" default="1"/>
+    <arg name="asv_system_id" default="1"/>
+    <arg name="irr_system_id" default="1"/>
+
+    <group ns="hector" if="$(arg use_uav)">
+        <arg name="tgt_system" default="$(arg uav_system_id)" />
+        <arg name="tgt_component" default="1" />
+
+        <include file="$(find mavros)/launch/node.launch">
+		<arg name="pluginlists_yaml" value="/home/anthony/mimree_ros/executables/config/pluginlists.yaml" />
+		<arg name="config_yaml" value="/home/anthony/mimree_ros/executables/config/hector_config.yaml" />
+            <arg name="fcu_url" value="$(arg uav_url)" />
+            <arg name="gcs_url" value="" />
+            <arg name="tgt_system" value="$(arg tgt_system)" />
+            <arg name="tgt_component" value="$(arg tgt_component)" />
+        </include>
+    </group>
+
+    <group ns="halcyon" if="$(arg use_asv)">
+        <arg name="tgt_system" default="$(arg asv_system_id)" />
+        <arg name="tgt_component" default="1" />
+
+        <include file="$(find mavros)/launch/node.launch">
+		<arg name="pluginlists_yaml" value="$(find mavros)/executables/config/pluginlists.yaml" />
+		<arg name="config_yaml" value="/$(find mavros)/executables/config/halcyon_config.yaml" />
+            <arg name="fcu_url" value="$(arg asv_url)" />
+            <arg name="gcs_url" value="" />
+            <arg name="tgt_system" value="$(arg tgt_system)" />
+            <arg name="tgt_component" value="$(arg tgt_component)" />
+        </include>
+    </group>
+
+    <group ns="corin" if="$(arg use_irr)">
+        <arg name="tgt_system" default="$(arg irr_system_id)" />
+        <arg name="tgt_component" default="1" />
+
+        <include file="$(find mavros)/launch/node.launch">
+		<arg name="pluginlists_yaml" value="~/mimree_ros/executables/config/pluginlists.yaml" />
+		<arg name="config_yaml" value="~/mimree_ros/executables/config/halcyon_config.yaml" />
+            <arg name="fcu_url" value="$(arg irr_url)" />
+            <arg name="gcs_url" value="" />
+            <arg name="tgt_system" value="$(arg tgt_system)" />
+            <arg name="tgt_component" value="$(arg tgt_component)" />
+        </include>
+    </group>
+</launch>
