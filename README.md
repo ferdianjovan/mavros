@@ -146,4 +146,4 @@ If required, update GeographicLib.
 $ sudo ./src/mavros_mallard/mavros/scripts/install_geographiclib_datasets.sh
 ```
 
-Then follow [Install Step 4](#4.-build-and-source) and onwards.
+Then follow [Install Step 4](#4-build-and-source) and onwards.
