@@ -41,7 +41,7 @@ Add the following lines at the end of the file.
 - git:  
     local-name: mavros  
     uri:  https://github.com/ferdianjovan/mavros.git 
-    version: lhm-test 
+    version: lhm_test 
 ```
 
 Install both packages
@@ -52,8 +52,7 @@ $ rosdep install --from-paths src --ignore-src -y
 
 Install GeographicLib datasets
 ```
-$ sudo ./src/mavros_mallard/mavros/scripts/
-$ install_geographiclib_datasets.sh
+$ sudo ./src/mavros_mallard/mavros/scripts/install_geographiclib_datasets.sh
 ```
 
 ## 4. Build and source
