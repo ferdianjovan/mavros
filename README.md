@@ -65,7 +65,7 @@ $ source devel/setup.bash
 ## (Optional) Add source to bashrc
 Add source to bashrc to avoid manual source everytime
 ```
-echo "source $HOME/devel/setup.bash" >> ~/.bashrc 
+$ echo "source $HOME/devel/setup.bash" >> ~/.bashrc 
 ```
 
 ### Original guides
