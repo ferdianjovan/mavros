@@ -52,7 +52,7 @@ $ rosdep install --from-paths src --ignore-src -y
 
 Install GeographicLib datasets
 ```
-$ sudo ./src/mavros_mallard/mavros/scripts/install_geographiclib_datasets.sh
+$ sudo ./src/mavros/mavros/scripts/install_geographiclib_datasets.sh
 ```
 
 ## 4. Build and source
@@ -139,11 +139,6 @@ After package references are updated, run `wstool update` and `rosdep install`.
 ```
 $ wstool update -t src -j4
 $ rosdep install --from-paths src --ignore-src -y
-```
-
-If required, update GeographicLib.
-```
-$ sudo ./src/mavros_mallard/mavros/scripts/install_geographiclib_datasets.sh
 ```
 
 Then follow [Install Step 4](#4-build-and-source) and onwards.
