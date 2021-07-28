@@ -8,16 +8,16 @@
 
 # Installation
 ## 1. Install catkin_tool and dependencies
+For Melodic:
 ```
 $ sudo apt-get install python-catkin-tools python-rosinstall-generator -y
 ```  
-> For Noetic use that:  
-> ```
-> $ sudo apt install python3-catkin-tools python3-rosinstall-generator python3-osrf-pycommon -y
-> ```
+For Noetic:  
+```
+$ sudo apt install python3-catkin-tools python3-rosinstall-generator python3-osrf-pycommon -y
+```
 
 ## 2. Create the workspace
-Not needed if you already has workspace
 
 ```
 $ mkdir -p ~/mimree_ros/src  
@@ -27,7 +27,7 @@ $ wstool init src
 ```
 
 ## 3. Add MAVLink package reference
-We use the Melodic reference for all ROS distros as it's not distro-specific and up to date
+For **both** Melodic and Noetic, we use mavlink melodic reference as it's not distro-specific and up to date
 ```
 $ rosinstall_generator --rosdistro melodic mavlink | tee src/.rosinstall
 ```
@@ -61,6 +61,12 @@ $ install_geographiclib_datasets.sh
 ```
 $ catkin build
 $ source devel/setup.bash
+```
+
+### 8. Add source to bashrc
+Optional, add source to bashrc to avoid manual source everytime
+```
+echo "source $HOME/devel/setup.bash" >> ~/.bashrc 
 ```
 
 ## Original guides
