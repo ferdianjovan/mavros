@@ -110,7 +110,7 @@ To send LHM command, open a new terminal and run
 ```
 $ cd mimree_ros/src/mavros/mavros/executables
 ```
-Run lhm_executor.py without any argument or with argument `help` to see a list of commands can use to control the LHM.
+Run *lhm_executor.py* without any argument or with argument `help` to see a list of commands can use to control the LHM.
 ```
 $ python lhm_executor.py
 help    Displace this message
