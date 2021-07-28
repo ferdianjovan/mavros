@@ -26,14 +26,13 @@ $ catkin init
 $ wstool init src  
 ```
 
-## 3. Add MAVLink package reference
-For **both** Melodic and Noetic, we use mavlink melodic reference as it's not distro-specific and up to date
+## 3. Install ROS packages
+For MAVLINK, we use the melodic reference **both** Melodic and Noetic as it's not distro-specific and up to date
 ```
 $ rosinstall_generator --rosdistro melodic mavlink | tee src/.rosinstall
 ```
 
-## 4. Add our custom mavros package reference
-Open `src/.rosinstall` with your desired text editor, e.g.:
+Next add our custom mavros package reference
 ```
 $ gedit src/.rosinstall
 ```
@@ -42,46 +41,58 @@ Add the following lines at the end of the file.
 - git:  
     local-name: mavros  
     uri:  https://github.com/ferdianjovan/mavros.git 
-    version: master 
+    version: lhm-test 
 ```
 
-## 5. Install both packages
+Install both packages
 ```
 $ wstool update -t src -j4
 $ rosdep install --from-paths src --ignore-src -y
 ```
 
-## 6. Install GeographicLib datasets
+Install GeographicLib datasets
 ```
 $ sudo ./src/mavros_mallard/mavros/scripts/
 $ install_geographiclib_datasets.sh
 ```
 
-## 7. Build and source
+## 4. Build and source
 ```
 $ catkin build
 $ source devel/setup.bash
 ```
 
-### 8. Add source to bashrc
-Optional, add source to bashrc to avoid manual source everytime
+## (Optional) Add source to bashrc
+Add source to bashrc to avoid manual source everytime
 ```
 echo "source $HOME/devel/setup.bash" >> ~/.bashrc 
 ```
 
-## Original guides
+### Original guides
 1. [MAVROS - README](https://github.com/EEEManchester/mavros_mallard/blob/master/README_MAVROS.md)
 2. [MAVROS - Installation instructions](https://github.com/mavlink/mavros/blob/master/mavros/README.md#installation)
 
 # Use
 
+## 1. Setup all the background processes
 Open a terminal and run roscore:
 ```
 $ roscore
 ```
 
-Plug in your usb telemetry and find out its port, e.g. `/dev/ttyUSB0`.<br>
-Open a new terminal and run mavproxy, replace `--master=/dev/ttyUSB0` with the correct port.
+> Test if the installation is successful
+> ```
+> rosmsg show mavros_msgs/DebugValue
+> rossrv show mavros_msgs/ButtonChange
+> ```
+> Both should return the definition of the rosmsg or rossrv. Otherwise, the installation is not successful.
+
+Open a new terminal, plug in your usb telemetry and find out its port
+```
+$ ls /dev/ | grep USB
+ttyUSB0
+```
+Run mavproxy, replace `--master=/dev/ttyUSB0` with the correct port.
 ```
 $ mavproxy.py --out=udp:127.0.0.1:14563 --mav20 --console --master=/dev/ttyUSB0
 ```
@@ -91,6 +102,15 @@ Open a third terminal and run mavros.
 $ roslaunch mavros mimree_apm.launch
 ```
 
+If everythong goes well, you should see telemetry connected in mavproxy and mavros returns its MAVLINK ID.
+
+## 2. Feedback monitor
+To monitor the feedback from LHM, open a fourth terminal and run `rostopic echo`
+```
+$ rostopic echo /halcyon/mavros/debug_value/debug_vector 
+```
+
+## 3. Send command
 To send LHM command, open a new terminal and run
 ```
 $ cd mimree_ros/src/mavros/mavros/executables
